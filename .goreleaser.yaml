@@ -3,6 +3,7 @@ before:
     # You may remove this if you don't use go modules.
     - go mod tidy
     - wget https://download.flashcat.cloud/categraf-libs/lib.tar.gz && tar zxvf lib.tar.gz && rm lib.tar.gz && mv lib /home/runner/work/categraf/categraf/
+    - ls
 
 snapshot:
   name_template: '{{ .Tag }}'
@@ -58,7 +59,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
-      - src: "/home/runner/work/categraf/categraf/lib"
+      - src: "lib/*"
         dst: lib
 
   - id: categraf-slim
@@ -73,7 +74,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
-      - src: "/home/runner/work/categraf/categraf/lib/*"
+      - src: "lib/*"
         dst: lib
 
 release:
