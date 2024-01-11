@@ -2,6 +2,7 @@ before:
   hooks:
     # You may remove this if you don't use go modules.
     - go mod tidy
+    - wget https://download.flashcat.cloud/categraf-libs/lib.tar.gz && tar zxvf lib.tar.gz && rm lib.tar.gz
 
 snapshot:
   name_template: '{{ .Tag }}'
