@@ -45,14 +45,8 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
-      - src: "lib/*"
-        dst: lib
-    hooks:
-      before:
-        - ls
-      after:
-        - ls
-
+      - lib/*
+      
 release:
   github:
     owner: Jungzhang
