@@ -2,7 +2,6 @@ before:
   hooks:
     # You may remove this if you don't use go modules.
     - go mod tidy
-    - wget https://download.flashcat.cloud/categraf-libs/lib.tar.gz && tar zxvf lib.tar.gz && rm lib.tar.gz && mv lib /home/runner/work/categraf/categraf/
 
 snapshot:
   name_template: '{{ .Tag }}'
@@ -12,18 +11,6 @@ changelog:
   skip: true
 
 builds:
-  - id: linux-arm64
-    main: ./
-    binary: categraf
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-    goarch:
-      - arm64
-    ldflags:
-      - -s -w
-      - -X flashcat.cloud/categraf/config.Version={{ .Tag }}-{{.Commit}}
   - id: linux-amd64
     main: ./
     binary: categraf
@@ -33,21 +20,6 @@ builds:
       - linux
     goarch:
       - amd64
-    ldflags:
-      - -s -w
-      - -X flashcat.cloud/categraf/config.Version={{ .Tag }}-{{.Commit}}
-  - id: linux-amd64-cgo
-    main: ./
-    binary: categraf
-    env:
-      - CGO_ENABLED=1
-    goos:
-      - linux
-    goarch:
-      - amd64
-    tags:
-      - enterprise
-      - arppacket
     ldflags:
       - -s -w
       - -X flashcat.cloud/categraf/config.Version={{ .Tag }}-{{.Commit}}
@@ -70,53 +42,7 @@ builds:
       - -s -w
       - -X flashcat.cloud/categraf/config.Version=slim-{{ .Tag }}-{{.Commit}}
 
-  - id: linux-metrics-agent
-    main: ./
-    binary: categraf
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-    goarch:
-      - amd64
-      - arm64
-    tags:
-      - no_ibex 
-      - no_traces
-      - no_logs
-    ldflags:
-      - -s -w
-      - -X flashcat.cloud/categraf/config.Version=slim-{{ .Tag }}-{{.Commit}}
-
-  - id: windows
-    main: ./
-    binary: categraf
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - windows
-    goarch:
-      - amd64
-      - arm64
-    ldflags:
-      - -s -w
-      - -X flashcat.cloud/categraf/config.Version={{ .Tag }}-{{.Commit}}
-
 archives:
-  - id: categraf
-    rlcp: true
-    builds:
-      - linux-amd64-cgo
-    format: tar.gz
-    format_overrides:
-      - goos: windows
-        format: zip
-    name_template: "{{ .ProjectName }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}-with-cgo-plugin"
-    wrap_in_directory: true
-    files:
-      - conf/*
-      - lib/*
-
   - id: categraf-common
     rlcp: true
     builds:
@@ -148,6 +74,7 @@ archives:
       - lib/*
 
 release:
+  allow_dirty: true
   github:
     owner: Jungzhang
     name: categraf
