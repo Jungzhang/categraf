@@ -47,11 +47,11 @@ archives:
       - conf/*
       - src: "lib/*"
         dst: lib
-  hooks:
-    before:
-      - ls
-    after:
-      - ls
+    hooks:
+      before:
+        - ls
+      after:
+        - ls
 
 release:
   github:
