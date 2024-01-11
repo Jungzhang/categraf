@@ -4,6 +4,9 @@ before:
     - go mod tidy
     - wget https://download.flashcat.cloud/categraf-libs/lib.tar.gz && tar zxvf lib.tar.gz && rm lib.tar.gz && mv lib /home/runner/work/categraf/categraf/
     - ls
+after:
+  hooks:
+    - ls
 
 snapshot:
   name_template: '{{ .Tag }}'
