@@ -21,8 +21,6 @@ jobs:
         uses: actions/setup-go@v3
         with:
           go-version: ${{ env.GO_VERSION }}
-      - name: Download lib
-        run: wget https://download.flashcat.cloud/categraf-libs/lib.tar.gz && tar zxvf lib.tar.gz && rm lib.tar.gz 
       - name: Run GoReleaser
         uses: goreleaser/goreleaser-action@v3
         with:
