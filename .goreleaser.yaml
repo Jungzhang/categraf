@@ -16,18 +16,6 @@ changelog:
   skip: true
 
 builds:
-  - id: linux-amd64
-    main: ./
-    binary: categraf
-    env:
-      - CGO_ENABLED=0
-    goos:
-      - linux
-    goarch:
-      - amd64
-    ldflags:
-      - -s -w
-      - -X flashcat.cloud/categraf/config.Version={{ .Tag }}-{{.Commit}}
   - id: linux-slim
     main: ./
     binary: categraf
@@ -48,23 +36,6 @@ builds:
       - -X flashcat.cloud/categraf/config.Version=slim-{{ .Tag }}-{{.Commit}}
 
 archives:
-  - id: categraf-common
-    rlcp: true
-    builds:
-      - linux-amd64
-      - linux-arm64
-      - windows
-    format: tar.gz
-    format_overrides:
-      - goos: windows
-        format: zip
-    name_template: "{{ .ProjectName }}-v{{ .Version }}-{{ .Os }}-{{ .Arch }}"
-    wrap_in_directory: true
-    files:
-      - conf/*
-      - src: "lib/*"
-        dst: lib
-
   - id: categraf-slim
     rlcp: true
     builds:
