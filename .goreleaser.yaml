@@ -73,7 +73,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
-      - src: "/home/runner/work/categraf/categraf/lib"
+      - src: "/home/runner/work/categraf/categraf/lib/*"
         dst: lib
 
 release:
