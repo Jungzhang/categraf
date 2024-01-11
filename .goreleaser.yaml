@@ -114,6 +114,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
+      - lib/*
 
   - id: categraf-common
     rlcp: true
@@ -129,6 +130,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
+      - lib/*
 
   - id: categraf-slim
     rlcp: true
@@ -142,6 +144,7 @@ archives:
     wrap_in_directory: true
     files:
       - conf/*
+      - lib/*
 
 release:
   github:
